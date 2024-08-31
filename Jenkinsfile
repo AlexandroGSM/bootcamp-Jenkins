@@ -1,26 +1,15 @@
 pipeline {
-    agent any
+    agent { label 'Slave-Jenkins' }
     stages {
-        stage('Checkout') {
+        stage('Check Apache') {
             steps {
-                git 'https://github.com/AlexandroGSM/bootcamp-Jenkins.git'
+                sh 'systemctl is-active apache2 || (echo "Apache is not running" && exit 1)'
             }
         }
-        stage('Build') {
+        stage('Deploy to Apache') {
             steps {
-                sh 'echo "Building..."'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                sshagent(['Slave']) {
-                    sh '''
-                    scp -o StrictHostKeyChecking=no index.html asurraco@192.168.1.20:/var/www/html/
-                    ssh asurraco@192.168.1.20'sudo systemctl restart apache2'
-                    '''
-                }
+                sh 'echo "<h1>Hello from Jenkins Pipeline</h1>" | sudo tee /var/www/html/index.html'
             }
         }
     }
 }
-
