@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Deploy to Apache') {
             steps {
-                sh 'echo "<h1>Hello from Jenkins Pipeline</h1> /n 31/08/2024 22:46" | sudo tee /var/www/html/index.html'
+                sh 'echo "<h1>Hello from Jenkins Pipeline 31/08/2024 22:46</h1> " | sudo tee /var/www/html/index.html'
             }
         }
     }
