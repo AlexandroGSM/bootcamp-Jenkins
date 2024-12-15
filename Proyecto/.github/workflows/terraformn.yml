@@ -1,0 +1,33 @@
+name: Terraform
+
+on:
+  push:
+    branches: [ entrega13 ]
+  pull_request:
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan -no-color
+
+      - name: Terraform Apply
+        # Solo aplica en la rama entrega13, o puedes hacer que aplique en main al hacer el merge.
+        if: github.ref == 'refs/heads/entrega13'
+        run: terraform apply -auto-approve -no-color
