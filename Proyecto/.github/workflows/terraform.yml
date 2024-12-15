@@ -2,7 +2,7 @@ name: Terraform
 
 on:
   push:
-    branches: [ entrega13 ]
+    branches: [ Entrega13 ]
   pull_request:
 
 jobs:
@@ -29,5 +29,5 @@ jobs:
 
       - name: Terraform Apply
         # Solo aplica en la rama entrega13, o puedes hacer que aplique en main al hacer el merge.
-        if: github.ref == 'refs/heads/entrega13'
+        if: github.ref == 'refs/heads/Entrega13'
         run: terraform apply -auto-approve -no-color
