@@ -19,6 +19,10 @@ jobs:
         with:
           terraform_version: 1.5.0
 
+      # Paso de Diagnóstico: Imprime las variables de entorno
+      - name: Debug Environment Variables
+        run: env
+
       - name: Terraform Init
         working-directory: ./Proyecto
         env:
