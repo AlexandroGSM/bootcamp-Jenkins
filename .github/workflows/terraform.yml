@@ -21,6 +21,8 @@ jobs:
 
       - name: Terraform Init
         working-directory: ./Proyecto
+        env:
+          TF_TOKEN_app_terraform_io: ${{ secrets.TF_API_TOKEN }}
         run: terraform init
 
       - name: Terraform Validate
@@ -31,9 +33,13 @@ jobs:
 
       - name: Terraform Plan
         working-directory: ./Proyecto
+        env:
+          TF_TOKEN_app_terraform_io: ${{ secrets.TF_API_TOKEN }}
         run: terraform plan -no-color
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/Entrega13'
         working-directory: ./Proyecto
+        env:
+          TF_TOKEN_app_terraform_io: ${{ secrets.TF_API_TOKEN }}
         run: terraform apply -auto-approve -no-color
