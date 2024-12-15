@@ -19,15 +19,18 @@ jobs:
           terraform_version: 1.5.0
 
       - name: Terraform Init
+        working-directory: ./bootcamp-Jenkins/Proyecto
         run: terraform init
 
       - name: Terraform Validate
+        working-directory: ./bootcamp-Jenkins/Proyecto
         run: terraform validate
 
       - name: Terraform Plan
+        working-directory: ./bootcamp-Jenkins/Proyecto
         run: terraform plan -no-color
 
       - name: Terraform Apply
-        # Solo aplica en la rama entrega13, o puedes hacer que aplique en main al hacer el merge.
         if: github.ref == 'refs/heads/Entrega13'
+        working-directory: ./bootcamp-Jenkins/Proyecto
         run: terraform apply -auto-approve -no-color
