@@ -4,6 +4,7 @@ on:
   push:
     branches: [ Entrega13 ]
   pull_request:
+    branches: [ Entrega13 ]
 
 jobs:
   terraform:
@@ -19,18 +20,18 @@ jobs:
           terraform_version: 1.5.0
 
       - name: Terraform Init
-        working-directory: ./bootcamp-Jenkins/Proyecto
+        working-directory: ./Proyecto
         run: terraform init
 
       - name: Terraform Validate
-        working-directory: ./bootcamp-Jenkins/Proyecto
+        working-directory: ./Proyecto
         run: terraform validate
 
       - name: Terraform Plan
-        working-directory: ./bootcamp-Jenkins/Proyecto
+        working-directory: ./Proyecto
         run: terraform plan -no-color
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/Entrega13'
-        working-directory: ./bootcamp-Jenkins/Proyecto
+        working-directory: ./Proyecto
         run: terraform apply -auto-approve -no-color
